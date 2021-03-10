@@ -6,7 +6,7 @@
 lista_contactos = list()
 op = 0
 
-while (op < 9):
+while (op < 10):
     if (op == 1):
         nombre_contacto = input('Digite nombre de contacto :')
         numero_contacto = input('Digite Numero de contacto :')
@@ -51,8 +51,22 @@ while (op < 9):
             print('Nobre contacto {} Numero {}'.format(lista_contactos[posicionX][0], lista_contactos[posicionX][1]))
         else:
             print('Contacto no Existe')
-
     if (op == 5):
+        opcion = 0
+        for index, tupla in enumerate(lista_contactos):
+            print('{} -> {}'.format(index, tupla[0]))
+        opcion = int(input('Ingrese opción de contacto para agregar números: '))
+        salir = True
+        auxList = list(lista_contactos[opcion])
+        while (salir) :
+            numero = input('Ingrese numero a agregar: ')
+            auxList.append(numero)
+            capturaSalir = input('Desea seguir agregando más numeros? y/n:')
+            if(capturaSalir=='n'):
+                salir = False
+        lista_contactos.pop(opcion)
+        lista_contactos.insert(opcion, tuple(auxList))
+    if (op == 6):
          encuentra = False
          posicionX = 0
          nombre_buscar = input('Digite nombre de contacto :')
@@ -84,14 +98,19 @@ while (op < 9):
          else:
              print('Contacto no Existe')
 
-    if (op == 6):
-        opcion = 0
-        for index, tupla in enumerate(lista_contactos):
-            print('{} -> {}'.format(index, tupla[0]))
-        opcion = int(input('Ingrese opción de contacto para eliminar: '))
-        lista_contactos.pop(opcion)
-
     if (op == 7):
+        try:
+            opcion = 0
+            for index, tupla in enumerate(lista_contactos):
+                print('{} -> {}'.format(index, tupla[0]))
+            opcion = int(input('Ingrese opción de contacto para eliminar: '))
+            if (opcion>=0 & opcion<=len(lista_contactos)):
+                lista_contactos.pop(opcion)
+            else:
+                print('NUMERO NO VALIDO')
+        except:
+            print('Error')
+    if (op == 8):
         for index, tupla in enumerate(lista_contactos):
             print('{} -> {}'.format(index, tupla[0]))
         opcion = int(input('Ingrese opción de contacto para cambiar el nombre: '))
@@ -102,7 +121,7 @@ while (op < 9):
         lista_contactos.pop(opcion)
         lista_contactos.insert(opcion, tuple(auxList))
 
-    if (op == 8):
+    if (op == 9):
         numeroingresado= input('Número a buscar: ')
         encontrado = False
         pos = 0
@@ -123,10 +142,11 @@ while (op < 9):
     print('2...Eliminar contactos')
     print('3...Listar contactos')
     print('4...Buscar...Listar contactos')
-    print('5...Eliminar o modificar un determinado numero de un contacto')
-    print('6...Eliminar un contacto')
-    print('7...Modificar nombre de un contacto')
-    print('8...Buscar contacto por su numero')
-    print('9...Salir')
+    print('5...Agregar numeros a un determinado contacto')
+    print('6...Eliminar o modificar un determinado numero de un contacto')
+    print('7...Eliminar un contacto')
+    print('8...Modificar nombre de un contacto')
+    print('9...Buscar contacto por su numero')
+    print('10...Salir')
     print('--------------------------')
     op = int(input('Digite su Opcion: '))
